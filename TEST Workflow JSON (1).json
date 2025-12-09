@@ -1,0 +1,234 @@
+{
+  "name": "TEST Workflow JSON",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c4577bce-44dd-4a51-8867-16f6510997a2",
+      "name": "When chat message received",
+      "webhookId": "b3992e83-3c60-41e3-9c53-eb67c380e55d"
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "<AgentInstructions>\n<Role>\n<name>RecipeGeneratorAgent</name>\n<description>A helpful cooking assistant that generates custom recipes.</description>\n</Role>\n<Goal>\n<Primary>Provide a complete recipe including ingredients and step-by-step instructions\nbased on the user's requested dish. </Primary>\n</Goal>\n<Instructions>\n<Instruction>Once you receive the user's dish name note them down carefully.\n</Instruction>\n<Instruction>Generate a list of ingredients with accurate quantities tailored to the\nspecified serving size.</Instruction>\n<Instruction>Provide clear, step-by-step instructions on how to prepare the dish.\n</Instruction>\n<Instruction>Where applicable, include cooking times, tips, or variations to enhance the\nrecipe.</Instruction>\n</Instructions>\n</AgentInstructions>\n\n<Examples>\n<Example>\n<UserInput> Poha With stuffed potato \n</UserInput>\n\n<useroutput>\n{\n  \"recipe_name\": \"Poha with Stuffed Potatoes\",\n  \"description\": \"A wholesome Indian breakfast combining soft lemony poha with spicy stuffed potatoes.\",\n  \"category\": \"Indian Breakfast Meal\",\n  \"servings\": 2,\n\n  \"ingredients\": \"Poha Ingredients: 1 cup thick poha (flattened rice), 1 medium onion (finely chopped), 1 green chili (optional), 1/4 cup peanuts, 1/2 tsp mustard seeds, 1/2 tsp turmeric powder, 1 tbsp oil, 8–10 curry leaves, Salt to taste, 1 tsp sugar (optional), 1 tbsp lemon juice, Fresh chopped coriander for garnish. Stuffed Potato Ingredients: 2 medium boiled potatoes, 1/4 cup finely chopped onions, 1 green chili (finely chopped), 1/2 tsp cumin seeds, 1/4 tsp turmeric powder, 1/2 tsp red chili powder, 1/2 tsp garam masala, 1 tbsp oil, Salt to taste, Fresh chopped coriander.\",\n\n  \"instructions\": \"1. Stuffed Potatoes: Cut the boiled potatoes in half and scoop out the center, leaving a 1/4-inch shell. Mash the scooped-out potato flesh. Heat 1 tbsp oil, add cumin seeds and let them splutter. Add onions and green chili; sauté until translucent. Add turmeric, red chili powder, garam masala, and salt. Mix in mashed potato and coriander. Stuff the mixture back into the potato shells. Shallow fry until golden or bake at 190°C (375°F) for 15–20 minutes. 2. Poha Preparation: Rinse poha lightly and drain well. Heat oil; add mustard seeds until crackling. Add curry leaves and peanuts; fry until golden. Add onions and green chili; sauté until soft. Add turmeric and salt. Add poha and sugar; mix gently and cook for 2–3 minutes. Turn off heat; add lemon juice and coriander. 3. Serving: Serve warm poha with freshly prepared stuffed potatoes; add yogurt or chutney if desired.\",\n\n  \"tips\": \"Do not over-soak the poha; it should remain fluffy. Adjust spice levels based on preference. You may air-fry or bake the stuffed potatoes for a healthier version. Stuffed potatoes also work great as an evening snack.\"\n}\n\n\n</useroutput>\n</Examples>\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        -16
+      ],
+      "id": "1b7901bc-7b14-4ed1-bab6-923907d6dc8b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        128,
+        176
+      ],
+      "id": "36e43e4a-81d1-4619-b2fc-1be35895e605",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "i7VWbd52N9f6VMcH",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"recipe_name\": \"Poha with Stuffed Potatoes\",\n  \"description\": \"A wholesome Indian breakfast combining soft lemony poha with spicy stuffed potatoes.\",\n  \"category\": \"Indian Breakfast Meal\",\n  \"servings\": 2,\n\n  \"ingredients\": \"Poha Ingredients: 1 cup thick poha (flattened rice), 1 medium onion (finely chopped), 1 green chili (optional), 1/4 cup peanuts, 1/2 tsp mustard seeds, 1/2 tsp turmeric powder, 1 tbsp oil, 8–10 curry leaves, Salt to taste, 1 tsp sugar (optional), 1 tbsp lemon juice, Fresh chopped coriander for garnish. Stuffed Potato Ingredients: 2 medium boiled potatoes, 1/4 cup finely chopped onions, 1 green chili (finely chopped), 1/2 tsp cumin seeds, 1/4 tsp turmeric powder, 1/2 tsp red chili powder, 1/2 tsp garam masala, 1 tbsp oil, Salt to taste, Fresh chopped coriander.\",\n\n  \"instructions\": \"1. Stuffed Potatoes: Cut the boiled potatoes in half and scoop out the center, leaving a 1/4-inch shell. Mash the scooped-out potato flesh. Heat 1 tbsp oil, add cumin seeds and let them splutter. Add onions and green chili; sauté until translucent. Add turmeric, red chili powder, garam masala, and salt. Mix in mashed potato and coriander. Stuff the mixture back into the potato shells. Shallow fry until golden or bake at 190°C (375°F) for 15–20 minutes. 2. Poha Preparation: Rinse poha lightly and drain well. Heat oil; add mustard seeds until crackling. Add curry leaves and peanuts; fry until golden. Add onions and green chili; sauté until soft. Add turmeric and salt. Add poha and sugar; mix gently and cook for 2–3 minutes. Turn off heat; add lemon juice and coriander. 3. Serving: Serve warm poha with freshly prepared stuffed potatoes; add yogurt or chutney if desired.\",\n\n  \"tips\": \"Do not over-soak the poha; it should remain fluffy. Adjust spice levels based on preference. You may air-fry or bake the stuffed potatoes for a healthier version. Stuffed potatoes also work great as an evening snack.\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        400,
+        208
+      ],
+      "id": "462ecdcb-9a16-413b-a3b5-7486ea4bcc70",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appjHldGrcNFlHV18",
+          "mode": "list",
+          "cachedResultName": "test",
+          "cachedResultUrl": "https://airtable.com/appjHldGrcNFlHV18"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbleBmLQQyQt6GqBI",
+          "mode": "list",
+          "cachedResultName": "Table 2",
+          "cachedResultUrl": "https://airtable.com/appjHldGrcNFlHV18/tbleBmLQQyQt6GqBI"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Recipe name": "={{ $json.output.recipe_name }}",
+            "Description": "={{ $json.output.description }}",
+            "Ingredient": "={{ $json.output.ingredients }}",
+            "Instruction": "={{ $json.output.instructions }}",
+            "Tips": "={{ $json.output.tips }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Recipe name",
+              "displayName": "Recipe name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Description",
+              "displayName": "Description",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Ingredient",
+              "displayName": "Ingredient",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Instruction",
+              "displayName": "Instruction",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tips",
+              "displayName": "Tips",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        576,
+        -16
+      ],
+      "id": "40a8cf3f-c6c2-4324-a546-8a1e5956ea30",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "yFGm1CLXuDf5KEyy",
+          "name": "Airtable Personal Access Token account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5322b0b6-52ef-42b8-8c4f-ad6f99127b4e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d6254ee2922682319ea0f2fc6b3ec07d7277fd4c078b7ae622d7ceec5ded477c"
+  },
+  "id": "5ljKiAsB7wR8V0aP",
+  "tags": []
+}
